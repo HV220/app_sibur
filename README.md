@@ -26,8 +26,8 @@
 2. [Подразделение телеметрии и телеизмерений.](documents/docs-tm/README-TM.md)
 
 **Внешняя часть приложения**
-1. [Структура приложения.](../app_sibur/md-files/part-2/part-2.md)
-2. [UI приложения.](../app_sibur/md-files/part-2/part-2-1.md)
+1. [Структура приложения.](/md-files/part-2/part-2.md)
+2. [UI приложения.](/md-files/part-2/part-2-1.md)
 
 **Внутренняя часть приложения**
 1. [Сетевая карта.](md-files/md-files/part-2-2.md)
