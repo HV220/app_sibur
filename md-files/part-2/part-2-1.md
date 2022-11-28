@@ -15,43 +15,4 @@
 
 [Схема UI-приложения находится здесь](../../schemes/%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD%20%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F.drawio)
 
-## Страница авторизации
-
-![fg](../../images/md-images/part-2/ui-app/img1.png)
-
-## Главная страница
-
-![fg](../../images/md-images/part-2/ui-app/img3.png)
-
-### Главная страница-поиск
-![fg](../../images/md-images/part-2/ui-app/img2.png)
-
-## Активное
-
-![gfg](../../images/md-images/part-2/ui-app/img9.png)
-
-## Документы
-
-### Документы-поиск
-![fgf](../../images/md-images/part-2/ui-app/img4.png)
-
-![gfg](../../images/md-images/part-2/ui-app/img5.png)
-
-### Документы-форма
-![gfg](../../images/md-images/part-2/ui-app/img6.png)
-
-## История
-
-![fgfg](../../images/md-images/part-2/ui-app/img9.png)
-
-## Помощь
-
-### О программе
-
-![gfg](../../images/md-images/part-2/ui-app/img8.png)
-
-### Служба поддержки
-
-![gfg](../../images/md-images/part-2/ui-app/img7.png)
-
 [**Вернуться на главную страницу**](../../README.md)
