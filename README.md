@@ -28,5 +28,5 @@
 2. [UI приложения.](/md-files/part-2/part-2-1.md)
 
 **Внутренняя часть приложения**
-1. [Сетевая карта.](md-files/md-files/part-2/part-2-2.md)
+1. [Сетевая карта.](/md-files/part-2/part-2-2.md)
 2. [Структура базы данных.](md-files/part-2/part-2-3.md)
