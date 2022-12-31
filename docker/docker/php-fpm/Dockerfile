@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get autoremove && apt-get autoclean \
     && apt-get update && apt-get install -y \
+    zip \
     libavif-dev \
     libicu-dev \
     libpq-dev \
