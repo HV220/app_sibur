@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap5": "~2.0.2",
         "vlucas/phpdotenv": "^5.5",
         "hail812/yii2-adminlte3": "~1.1",
-        "hail812/yii2-adminlte-widgets": "~1.0"
+        "hail812/yii2-adminlte-widgets": "~1.0",
+        "yii2mod/yii2-rbac": "^2.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

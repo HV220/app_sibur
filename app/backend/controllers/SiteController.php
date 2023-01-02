@@ -4,15 +4,29 @@ namespace backend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\ErrorAction;
 use common\models\LoginForm;
+use yii2mod\rbac\filters\AccessControl;
 
 class SiteController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'allowActions' => [
+                    'index',
+                ]
+            ],
+        ];
+    }
+
     public function actions()
     {
         return [
             'error' => [
-                'class' => \yii\web\ErrorAction::class,
+                'class' => ErrorAction::class,
             ],
         ];
     }

@@ -32,5 +32,10 @@ return [
             ],
         ],
     ],
+    'modules' => [
+        'rbac' => [
+            'class' => 'yii2mod\rbac\ConsoleModule'
+        ]
+        ],
     'params' => $params,
 ];
