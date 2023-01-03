@@ -12,7 +12,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -43,6 +42,14 @@ return [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+            ],
+        ],
+    ],
+    'modules' => [
+        'rbac' => [
+            'class' => 'yii2mod\rbac\Module',
+            'as access' => [
+                'class' => yii2mod\rbac\filters\AccessControl::class,
             ],
         ],
     ],

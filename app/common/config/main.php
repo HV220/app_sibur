@@ -12,7 +12,6 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['guest', 'user'],
         ],
         'i18n' => [
             'translations' => [
@@ -21,11 +20,6 @@ return [
                     'basePath' => '@yii2mod/rbac/messages',
                 ],
             ],
-        ],
-    ],
-    'modules' => [
-        'rbac' => [
-            'class' => 'yii2mod\rbac\Module',
         ],
     ],
 ];

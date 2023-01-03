@@ -27,6 +27,8 @@ use yii\base\NotSupportedException;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    // todo  Настроить отображение почты вместо ника для rbac(крашит)
+    public $username = '';
     public const STATUS_DELETED = 0;
     public const STATUS_INACTIVE = 9;
     public const STATUS_ACTIVE = 10;
@@ -125,5 +127,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

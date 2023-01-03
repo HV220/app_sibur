@@ -6,3 +6,7 @@ start:
 
 stop:
 	@docker-compose -f ./docker/docker-compose.yml stop
+
+init:
+	@docker exec -it php-fpm php yii migrate/up --interactive 0 --migrationPath=@yii/rbac/migrations
+	@docker exec -it php-fpm php yii migrate/up --interactive 0
