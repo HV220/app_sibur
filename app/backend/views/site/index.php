@@ -1,7 +1,9 @@
 <?php
+/* @var View $this */
 
 use hail812\adminlte\widgets\InfoBox;
 use hail812\adminlte\widgets\SmallBox;
+use yii\web\View;
 
 $this->title = 'Starter Page';
 $this->params['breadcrumbs'] = [['label' => $this->title]];

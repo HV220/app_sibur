@@ -1,9 +1,12 @@
 <?php
-/* @var $content string */
+/* @var string $content */
+/* @var View $this */
+/* @var false|string $assetDir */
 
+use yii\bootstrap5\Breadcrumbs;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
-use yii\bootstrap5\Breadcrumbs;
+use yii\web\View;
 
 ?>
 <div class="content-wrapper">
@@ -19,18 +22,18 @@ use yii\bootstrap5\Breadcrumbs;
                         } else {
                             echo Inflector::camelize($this->context->id);
                         }
-?>
+                        ?>
                     </h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <?php
                     echo Breadcrumbs::widget([
-'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-'options' => [
-    'class' => 'breadcrumb float-sm-right'
-]
+                        'links' => $this->params['breadcrumbs'] ?? [],
+                        'options' => [
+                            'class' => 'breadcrumb float-sm-right'
+                        ]
                     ]);
-?>
+                    ?>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

@@ -1,11 +1,13 @@
 <?php
 
+/* @var View $this */
+/* @var User $model */
+
+use common\models\User;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
-
-/* @var $this yii\web\View */
-/* @var $model common\models\User */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];

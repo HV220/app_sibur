@@ -15,5 +15,5 @@ return [
                 'js' => ['toastr/toastr.min.js']
             ],
         ]
-        ],
+    ],
 ];

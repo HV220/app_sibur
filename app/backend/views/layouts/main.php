@@ -1,11 +1,13 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+/* @var View $this */
 
-use yii\helpers\Html;
+/* @var string $content */
+
 use hail812\adminlte3\assets\AdminLteAsset;
 use hail812\adminlte3\assets\FontAwesomeAsset;
+use yii\helpers\Html;
+use yii\web\View;
 
 FontAwesomeAsset::register($this);
 AdminLteAsset::register($this);
@@ -14,7 +16,7 @@ $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
 
 $publishedRes = Yii::$app->assetManager->publish('@vendor/hail812/yii2-adminlte3/src/web/js');
-$this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\hail812\adminlte3\assets\AdminLteAsset']);
+$this->registerJsFile($publishedRes[1] . '/control_sidebar.js', ['depends' => '\hail812\adminlte3\assets\AdminLteAsset']);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

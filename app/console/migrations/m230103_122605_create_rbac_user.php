@@ -1,9 +1,14 @@
 <?php
 
 use yii\db\Migration;
-
+/**
+ * Class m230103_122605_create_rbac_user
+ */
 class m230103_122605_create_rbac_user extends Migration
 {
+    /**
+     * @throws Exception
+     */
     public function safeUp()
     {
         $auth = Yii::$app->authManager;
@@ -13,6 +18,7 @@ class m230103_122605_create_rbac_user extends Migration
             'user/create' => 'Страница user - создание',
             'user/update' => 'Страница user - изменение',
             'user/delete' => 'Страница user - удаление',
+            'rbac/modules' => 'Страница rbac - полный доступ',
         ];
 
         foreach ($permissions as $permission => $description) {
@@ -24,6 +30,9 @@ class m230103_122605_create_rbac_user extends Migration
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function safeDown()
     {
         return true;

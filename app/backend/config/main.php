@@ -50,6 +50,12 @@ return [
             'class' => 'yii2mod\rbac\Module',
             'as access' => [
                 'class' => yii2mod\rbac\filters\AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['rbac/modules'],
+                    ],
+                ]
             ],
         ],
     ],

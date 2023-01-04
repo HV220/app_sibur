@@ -1,12 +1,12 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\UserSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var yii\web\View $this */
+/* @var common\models\UserSearch $searchModel */
+/* @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = Yii::t('app', 'Users');
 $this->params['breadcrumbs'][] = $this->title;

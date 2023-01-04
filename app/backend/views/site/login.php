@@ -1,6 +1,14 @@
 <?php
-use yii\helpers\Html;
+
+/* @var View $this */
+
+/* @var LoginForm $model */
+
+use common\models\LoginForm;
 use yii\bootstrap5\ActiveForm;
+use yii\helpers\Html;
+use yii\web\View;
+
 ?>
 <div class="card">
     <div class="card-body login-card-body">

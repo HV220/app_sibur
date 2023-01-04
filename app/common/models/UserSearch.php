@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace common\models;
 
 use yii\data\ActiveDataProvider;
-use common\models\User;
 
 /**
  * UserSearch represents the model behind the search form of `common\models\User`.
@@ -13,7 +13,7 @@ class UserSearch extends User
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'position_id', 'status', 'created_at', 'updated_at'], 'integer'],
@@ -28,7 +28,7 @@ class UserSearch extends User
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search(array $params): ActiveDataProvider
     {
         $query = User::find();
 

@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -18,7 +19,7 @@ class Position extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'position';
     }
@@ -26,7 +27,7 @@ class Position extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['name'], 'required'],
@@ -37,7 +38,7 @@ class Position extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -48,9 +49,9 @@ class Position extends ActiveRecord
     /**
      * Gets query for [[Users]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getUsers()
+    public function getUsers(): ActiveQuery
     {
         return $this->hasMany(User::class, ['position_id' => 'id']);
     }

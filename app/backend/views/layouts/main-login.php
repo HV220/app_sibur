@@ -1,11 +1,11 @@
 <?php
 
-use Yii;
-use hail812\adminlte3\assets\PluginAsset;
 use hail812\adminlte3\assets\AdminLteAsset;
+use hail812\adminlte3\assets\PluginAsset;
+use yii\web\View;
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+/* @var View $this */
+/* @var string $content */
 
 AdminLteAsset::register($this);
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
@@ -14,7 +14,7 @@ PluginAsset::register($this)->add(['fontawesome', 'icheck-bootstrap']);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,10 +25,10 @@ PluginAsset::register($this)->add(['fontawesome', 'icheck-bootstrap']);
     <?php $this->head() ?>
 </head>
 <body class="hold-transition login-page">
-<?php  $this->beginBody() ?>
+<?php $this->beginBody() ?>
 <div class="login-box">
     <div class="login-logo">
-        <a href="<?=Yii::$app->homeUrl?>"><b>Admin</b>LTE</a>
+        <a href="<?= Yii::$app->homeUrl ?>"><b>Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
 

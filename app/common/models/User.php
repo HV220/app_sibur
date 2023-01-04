@@ -1,10 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace common\models;
 
+use yii\base\NotSupportedException;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use yii\base\NotSupportedException;
 
 /**
  * This is the model class for table "user".
@@ -23,20 +25,22 @@ use yii\base\NotSupportedException;
  * @property int $created_at Создано
  * @property int $updated_at Обновлено
  *
+ * @property-read string $authKey
  * @property Position $position
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    // todo  Настроить отображение почты вместо ника для rbac(крашит)
-    public $username = '';
+
     public const STATUS_DELETED = 0;
     public const STATUS_INACTIVE = 9;
     public const STATUS_ACTIVE = 10;
+    // todo  Настроить отображение почты вместо ника для rbac(крашит)
+    public string $username = '';
 
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user';
     }
@@ -44,11 +48,28 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public static function findIdentity($id): User|IdentityInterface|null
+    {
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @throws NotSupportedException
+     */
+    public static function findIdentityByAccessToken($token, $type = null): ?IdentityInterface
+    {
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules(): array
     {
         return [
             [['email', 'auth_key', 'surname', 'name', 'position_id', 'password_hash', 'created_at', 'updated_at'], 'required'],
-            [['position_id','created_at', 'updated_at'], 'default', 'value' => null],
+            [['position_id', 'created_at', 'updated_at'], 'default', 'value' => null],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             [['position_id', 'status', 'created_at', 'updated_at'], 'integer'],
@@ -63,7 +84,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ИД',
@@ -85,27 +106,11 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Gets query for [[Position]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getPosition()
+    public function getPosition(): ActiveQuery
     {
         return $this->hasOne(Position::class, ['id' => 'position_id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
     /**
@@ -116,20 +121,26 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->getPrimaryKey();
     }
 
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
-
-     /**
+    /**
      * {@inheritdoc}
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($authKey): ?bool
     {
         return $this->getAuthKey() === $authKey;
     }
 
-    public function getEmail()
+    /**
+     * @return string
+     */
+    public function getAuthKey(): string
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
     {
         return $this->email;
     }

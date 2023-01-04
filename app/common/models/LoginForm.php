@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace common\models;
 
 use Yii;
 use yii\base\Model;
-use common\models\User;
 
 /**
  * LoginForm is the model behind the login form.
@@ -14,19 +14,19 @@ use common\models\User;
  */
 class LoginForm extends Model
 {
-    public $email;
-    public $password;
-    public $rememberMe = true;
+    public string $email;
+    public string $password;
+    public bool $rememberMe = true;
 
 
     /**
      * @return array the validation rules.
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             // username and password are both required
-            [['email','password'], 'required'],
+            [['email', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -34,7 +34,7 @@ class LoginForm extends Model
         ];
     }
 
-    public function login()
+    public function login(): bool
     {
         if (!$this->validate()) {
             return false;

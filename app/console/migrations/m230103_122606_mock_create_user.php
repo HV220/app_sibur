@@ -9,12 +9,15 @@ class m230103_122606_mock_create_user extends Migration
 {
     /**
      * {@inheritdoc}
+     * @throws Exception
      */
     public function safeUp()
     {
         if (YII_ENV_DEV) {
             $auth = Yii::$app->authManager;
+
             $developerRole = $auth->createRole('Developer');
+
             $auth->add($developerRole);
 
             $permissions = $auth->getPermissions();
@@ -23,51 +26,12 @@ class m230103_122606_mock_create_user extends Migration
                 $auth->addChild($developerRole, $permission);
             }
 
-            $createRbac = $auth->createPermission('/rbac/*');
-            $auth->add($createRbac);
+            $this->batchInsert('position', ['name',], [['Разработчик',],]);
 
-            $auth->addChild($developerRole, $createRbac);
+            $this->batchInsert('user', ['email', 'auth_key', 'surname', 'name', 'position_id', 'password_hash', 'created_at', 'updated_at',], [['test@mail.ru', 'test', 'surname', 'name', '1', '$2y$13$DlHGpyqt4gLQaTymkGoRR.gPDBKCTDTrB/xarORCVa4WkGJyCJuFC', '0', '0',],]);
 
-            $this->batchInsert(
-                'position',
-                [
-                    'name',
-                ],
-                [
-                    [
-                        'Разработчик',
-                    ],
-                ]
-            );
-
-            $this->batchInsert(
-                'user',
-                [
-                    'email',
-                    'auth_key',
-                    'surname',
-                    'name',
-                    'position_id',
-                    'password_hash',
-                    'created_at',
-                    'updated_at',
-                ],
-                [
-                    [
-                    'test@mail.ru',
-                    'test',
-                    'surname',
-                    'name',
-                    '1',
-                    '$2y$13$DlHGpyqt4gLQaTymkGoRR.gPDBKCTDTrB/xarORCVa4WkGJyCJuFC',
-                    '0',
-                    '0',
-                    ],
-                ]
-            );
+            $auth->assign($developerRole, $this->db->lastInsertID);
         }
-
-        $auth->assign($developerRole, $this->db->lastInsertID);
     }
 
     /**

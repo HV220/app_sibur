@@ -1,11 +1,11 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\User */
-/* @var $form yii\bootstrap5\ActiveForm */
+/* @var yii\web\View $this */
+/* @var common\models\User $model */
+/* @var yii\bootstrap5\ActiveForm $form */
 ?>
 
 <div class="user-form">

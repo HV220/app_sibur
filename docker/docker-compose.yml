@@ -1,7 +1,6 @@
 version: '3.4'
 services:
     nginx:
-        container_name: nginx
         image: 'nginx:1.23.2'
         working_dir: /app
         volumes:
@@ -15,14 +14,12 @@ services:
             - NGINX_INDEX_DIR=$NGINX_INDEX_DIR
 
     php-fpm:
-        container_name: php-fpm
         build: docker/php-fpm
         working_dir: /app
         volumes:
             - '$APP_DIR:/app'
 
     db:
-        container_name: db
         image: 'postgres:15-bullseye'
         working_dir: /app
         environment:
