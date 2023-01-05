@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 use yii\db\Migration;
+
 /**
  * Class m230103_122605_create_rbac_user
  */
 class m230103_122605_create_rbac_user extends Migration
 {
     /**
-     * @throws Exception
+     * {@inheritdoc}
      */
     public function safeUp()
     {

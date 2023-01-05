@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /* @var View $this */
+
 /* @var User $model */
 
 use common\models\User;
@@ -21,7 +24,9 @@ YiiAsset::register($this);
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], [
+                            'class' => 'btn btn-primary'
+                        ]) ?>
                         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
                             'data' => [
@@ -39,7 +44,6 @@ YiiAsset::register($this);
                             'surname',
                             'name',
                             'patronymic',
-                            'position_id',
                             'status',
                             'verification_token',
                             'password_hash',

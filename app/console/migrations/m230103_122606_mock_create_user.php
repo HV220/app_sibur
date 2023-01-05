@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use yii\db\Migration;
 
 /**
@@ -9,7 +11,6 @@ class m230103_122606_mock_create_user extends Migration
 {
     /**
      * {@inheritdoc}
-     * @throws Exception
      */
     public function safeUp()
     {
@@ -26,9 +27,21 @@ class m230103_122606_mock_create_user extends Migration
                 $auth->addChild($developerRole, $permission);
             }
 
-            $this->batchInsert('position', ['name',], [['Разработчик',],]);
-
-            $this->batchInsert('user', ['email', 'auth_key', 'surname', 'name', 'position_id', 'password_hash', 'created_at', 'updated_at',], [['test@mail.ru', 'test', 'surname', 'name', '1', '$2y$13$DlHGpyqt4gLQaTymkGoRR.gPDBKCTDTrB/xarORCVa4WkGJyCJuFC', '0', '0',],]);
+            $this->batchInsert(
+                'user',
+                ['email', 'auth_key', 'surname', 'name', 'password_hash', 'created_at', 'updated_at'],
+                [
+                    [
+                        'test@mail.ru',
+                        'test',
+                        'surname',
+                        'name',
+                        '$2y$13$DlHGpyqt4gLQaTymkGoRR.gPDBKCTDTrB/xarORCVa4WkGJyCJuFC',
+                        '0',
+                        '0',
+                    ],
+                ]
+            );
 
             $auth->assign($developerRole, $this->db->lastInsertID);
         }

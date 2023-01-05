@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
@@ -22,8 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
 
-                    <?php Pjax::begin(); ?>
-                    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
+                    <?php
+                    Pjax::begin(); ?>
+                    <?php
+                    // echo $this->render('_search', ['model' => $searchModel]);?>
 
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
@@ -37,7 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             'surname',
                             'name',
                             //'patronymic',
-                            //'position_id',
                             //'status',
                             //'verification_token',
                             //'password_hash',
@@ -53,7 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]
                     ]); ?>
 
-                    <?php Pjax::end(); ?>
+                    <?php
+                    Pjax::end(); ?>
 
                 </div>
                 <!--.card-body-->

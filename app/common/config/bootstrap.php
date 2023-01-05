@@ -1,7 +1,9 @@
 <?php
 
-Yii::setAlias('@common', dirname(__DIR__));
-Yii::setAlias('@backend', dirname(dirname(__DIR__)) . '/backend');
-Yii::setAlias('@console', dirname(dirname(__DIR__)) . '/console');
+declare(strict_types=1);
 
-Dotenv\Dotenv::createMutable(dirname(dirname(__DIR__)))->load();
+Yii::setAlias('@common', dirname(__DIR__));
+Yii::setAlias('@backend', dirname(__DIR__, 2) . '/backend');
+Yii::setAlias('@console', dirname(__DIR__, 2) . '/console');
+
+Dotenv\Dotenv::createMutable(dirname(__DIR__, 2))->load();

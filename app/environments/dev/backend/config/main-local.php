@@ -1,5 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
+use yii\debug\Module as DebugModule;
+use yii\gii\Module;
+
 $config = [
     'components' => [
         'request' => [
@@ -13,13 +18,13 @@ if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
-        'class' => \yii\debug\Module::class,
+        'class' => DebugModule::class,
         'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-        'class' => \yii\gii\Module::class,
+        'class' => Module::class,
         'allowedIPs' => ['*'],
         'generators' => [
             'crud' => [
@@ -28,7 +33,7 @@ if (YII_ENV_DEV) {
                     'yii2-adminlte3' => '@vendor/hail812/yii2-adminlte3/src/gii/generators/crud/default',
                 ]
             ]
-                ],
+        ],
     ];
 }
 

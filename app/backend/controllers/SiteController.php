@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace backend\controllers;
@@ -11,11 +12,7 @@ use yii\web\Response;
 use yii2mod\rbac\filters\AccessControl;
 
 /**
- *
- */
-
-/**
- *
+ * SiteController class
  */
 class SiteController extends Controller
 {
@@ -34,14 +31,10 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
-                    [
-                        'actions' => ['index'],
-                        'allow' => true,
-                    ]
                 ],
             ],
         ]);
@@ -72,6 +65,10 @@ class SiteController extends Controller
      */
     public function actionLogin(): Response|string
     {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $model = new LoginForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -91,6 +88,7 @@ class SiteController extends Controller
     public function actionLogout(): Response
     {
         Yii::$app->user->logout();
+
         return $this->goHome();
     }
 }

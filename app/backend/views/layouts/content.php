@@ -1,6 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 /* @var string $content */
 /* @var View $this */
+
 /* @var false|string $assetDir */
 
 use yii\bootstrap5\Breadcrumbs;
@@ -10,7 +14,6 @@ use yii\web\View;
 
 ?>
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -21,10 +24,9 @@ use yii\web\View;
                             echo Html::encode($this->title);
                         } else {
                             echo Inflector::camelize($this->context->id);
-                        }
-                        ?>
+                        } ?>
                     </h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <?php
                     echo Breadcrumbs::widget([
@@ -32,17 +34,12 @@ use yii\web\View;
                         'options' => [
                             'class' => 'breadcrumb float-sm-right'
                         ]
-                    ]);
-                    ?>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                    ]) ?>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <div class="content">
-        <?= $content ?><!-- /.container-fluid -->
+        <?= $content ?>
     </div>
-    <!-- /.content -->
 </div>

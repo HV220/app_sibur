@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace common\models;
@@ -16,8 +17,20 @@ class UserSearch extends User
     public function rules(): array
     {
         return [
-            [['id', 'position_id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['email', 'auth_key', 'surname', 'name', 'patronymic', 'verification_token', 'password_hash', 'password_reset_token'], 'safe'],
+            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [
+                [
+                    'email',
+                    'auth_key',
+                    'surname',
+                    'name',
+                    'patronymic',
+                    'verification_token',
+                    'password_hash',
+                    'password_reset_token'
+                ],
+                'safe'
+            ],
         ];
     }
 
@@ -49,7 +62,6 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'position_id' => $this->position_id,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

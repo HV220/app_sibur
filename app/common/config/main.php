@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+use yii\caching\FileCache;
+
 return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'vendorPath' => dirname(__DIR__, 2) . '/vendor',
     'components' => [
         'cache' => [
-            'class' => \yii\caching\FileCache::class,
+            'class' => FileCache::class,
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use yii\db\Migration;
 
 /**
@@ -19,7 +21,6 @@ class m230101_122604_create_user_table extends Migration
             'surname' => $this->string()->notNull()->comment('Фамилия'),
             'name' => $this->string()->notNull()->comment('Имя'),
             'patronymic' => $this->string()->comment('Отчество'),
-            'position_id' => $this->integer()->notNull()->comment('Должность'),
             'status' => $this->smallInteger()->notNull()->defaultValue(10)->comment('Статус'),
             'verification_token' => $this->string()->defaultValue(null)->comment('Токен верификации'),
             'password_hash' => $this->string()->notNull()->comment('Хэш пароля'),
@@ -27,13 +28,6 @@ class m230101_122604_create_user_table extends Migration
             'created_at' => $this->integer()->notNull()->comment('Создано'),
             'updated_at' => $this->integer()->notNull()->comment('Обновлено'),
         ]);
-
-        $this->createTable('{{%position}}', [
-            'id' => $this->primaryKey()->comment('ИД'),
-            'name' => $this->string()->notNull()->comment('Должность'),
-        ]);
-
-        $this->addForeignKey('FK_user_position', 'user', 'position_id', 'position', 'id');
     }
 
     /**
@@ -41,8 +35,6 @@ class m230101_122604_create_user_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('FK_user_position', 'user');
-        $this->dropTable('{{%position}}');
         $this->dropTable('{{%user}}');
     }
 }

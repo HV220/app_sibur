@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace common\models;
@@ -14,7 +15,7 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-    public string $email;
+    public ?string $email = null;
     public string $password;
     public bool $rememberMe = true;
 
@@ -34,13 +35,16 @@ class LoginForm extends Model
         ];
     }
 
+    /**
+     * @return bool
+     */
     public function login(): bool
     {
         if (!$this->validate()) {
             return false;
         }
 
-        $user = User::findOne(['email' => $this->email]);
+        $user = User::findIdentityByEmail($this->email);
 
         if ($user && Yii::$app->getSecurity()->validatePassword($this->password, $user->password_hash)) {
             return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
@@ -10,7 +12,8 @@ use yii\helpers\Html;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php
+    $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
@@ -21,8 +24,6 @@ use yii\helpers\Html;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'patronymic')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'position_id')->textInput() ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
 
@@ -40,6 +41,7 @@ use yii\helpers\Html;
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php
+    ActiveForm::end(); ?>
 
 </div>
