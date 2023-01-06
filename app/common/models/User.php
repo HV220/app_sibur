@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace common\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -23,6 +24,7 @@ use yii\web\IdentityInterface;
  * @property int $created_at Создано
  * @property int $updated_at Обновлено
  *
+ * @property-read array $roles
  * @property-read string $authKey
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -65,7 +67,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByEmail($email): User|array|ActiveRecord|null
     {
-        return User::find()->where(['auth_key' => $email])->one();
+        return User::find()->where(['email' => $email])->one();
     }
 
     /**
@@ -152,5 +154,22 @@ class User extends ActiveRecord implements IdentityInterface
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @param $password
+     * @return bool
+     */
+    public function validatePassword($password): bool
+    {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return Yii::$app->authManager->getRolesByUser($this->id);
     }
 }

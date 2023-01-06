@@ -14,6 +14,11 @@ use yii\helpers\Html;
 
     <?php
     $form = ActiveForm::begin(); ?>
+    <?php
+    // todo Сделать одображение и редактирование ролей(сейчас падают роли текущие для пользователя)
+    ?>
+
+    <?= $form->field($model, 'username')->dropDownList(array_keys($model->getRoles())); ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 

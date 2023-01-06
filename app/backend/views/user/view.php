@@ -38,6 +38,10 @@ YiiAsset::register($this);
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
+                            [
+                                'label' => 'roles',
+                                'value' => implode(', ', array_keys($model->getRoles())),
+                            ],
                             'id',
                             'email:email',
                             'auth_key',

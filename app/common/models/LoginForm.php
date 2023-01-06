@@ -6,6 +6,7 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
+use yii\db\ActiveRecord;
 
 /**
  * LoginForm is the model behind the login form.
@@ -18,7 +19,7 @@ class LoginForm extends Model
     public ?string $email = null;
     public string $password;
     public bool $rememberMe = true;
-
+    private ?User $user = null;
 
     /**
      * @return array the validation rules.
@@ -26,12 +27,11 @@ class LoginForm extends Model
     public function rules(): array
     {
         return [
-            // username and password are both required
             [['email', 'password'], 'required'],
-            // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
             ['email', 'email'],
+            // password is validated by validatePassword()
+            ['password', 'validatePassword'],
         ];
     }
 
@@ -40,18 +40,37 @@ class LoginForm extends Model
      */
     public function login(): bool
     {
-        if (!$this->validate()) {
-            return false;
+        if ($this->validate()) {
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
-
-        $user = User::findIdentityByEmail($this->email);
-
-        if ($user && Yii::$app->getSecurity()->validatePassword($this->password, $user->password_hash)) {
-            return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
-        }
-
-        $this->addError('password', 'Incorrect username or password.');
 
         return false;
+    }
+
+    /**
+     * @param $attribute
+     * @param $params
+     * @return void
+     */
+    public function validatePassword($attribute, $params): void
+    {
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+            if (!$user || !$user->validatePassword($this->password)) {
+                $this->addError($attribute, 'Incorrect username or password.');
+            }
+        }
+    }
+
+    /**
+     * @return array|User|ActiveRecord|null
+     */
+    protected function getUser(): User|array|ActiveRecord|null
+    {
+        if ($this->user === null) {
+            $this->user = User::findIdentityByEmail($this->email);
+        }
+
+        return $this->user;
     }
 }
