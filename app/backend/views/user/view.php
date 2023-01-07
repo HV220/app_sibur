@@ -40,7 +40,7 @@ YiiAsset::register($this);
                         'attributes' => [
                             [
                                 'label' => 'roles',
-                                'value' => implode(', ', array_keys($model->getRoles())),
+                                'value' => implode(', ', $model->roles),
                             ],
                             'id',
                             'email:email',

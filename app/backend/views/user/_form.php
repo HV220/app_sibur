@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use kartik\select2\Select2;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
@@ -11,14 +12,27 @@ use yii\helpers\Html;
 ?>
 
 <div class="user-form">
-
     <?php
-    $form = ActiveForm::begin(); ?>
-    <?php
-    // todo Сделать одображение и редактирование ролей(сейчас падают роли текущие для пользователя)
-    ?>
+    $form = ActiveForm::begin() ?>
 
-    <?= $form->field($model, 'username')->dropDownList(array_keys($model->getRoles())); ?>
+    <?= $form->field($model, 'roles')
+        ->widget(
+            Select2::class,
+            [
+                'name' => 'kv_theme_bootstrap_2',
+                'data' => $model->structureRoles(array_keys((Yii::$app->authManager->getRoles()))),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'options' => [
+                    'value' => $model->structureRoles($model->roles),
+                    'multiple' => true,
+                    'autocomplete' => 'off',
+                    'selected' => true
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                ],
+            ]
+        ) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
@@ -47,6 +61,6 @@ use yii\helpers\Html;
     </div>
 
     <?php
-    ActiveForm::end(); ?>
+    ActiveForm::end() ?>
 
 </div>

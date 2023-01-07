@@ -88,13 +88,11 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ИД
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return User
+     * @throws NotFoundHttpException
      */
-    protected function findModel(int $id): User
+    protected function findModel($id): User
     {
         if (($model = User::findOne($id)) !== null) {
             return $model;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace common\models;
 
+use Exception;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -24,7 +25,8 @@ use yii\web\IdentityInterface;
  * @property int $created_at Создано
  * @property int $updated_at Обновлено
  *
- * @property-read array $roles
+ * @property-read string $username
+ * @property array $roles
  * @property-read string $authKey
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -32,8 +34,6 @@ class User extends ActiveRecord implements IdentityInterface
     public const STATUS_DELETED = 0;
     public const STATUS_INACTIVE = 9;
     public const STATUS_ACTIVE = 10;
-    // todo  Настроить отображение почты вместо ника для rbac(крашит)
-    public string $username = '';
 
     /**
      * {@inheritdoc}
@@ -100,6 +100,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['auth_key'], 'string', 'max' => 32],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
+            [['roles'], 'safe'],
         ];
     }
 
@@ -121,6 +122,7 @@ class User extends ActiveRecord implements IdentityInterface
             'password_reset_token' => 'Токен сброса пароля',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
+            'roles' => 'Должность',
         ];
     }
 
@@ -170,6 +172,59 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getRoles(): array
     {
-        return Yii::$app->authManager->getRolesByUser($this->id);
+        return array_keys(Yii::$app->authManager->getRolesByUser($this->id));
+    }
+
+    /**
+     * @param $roles
+     * @return void
+     * @throws Exception
+     */
+    public function setRoles($roles): void
+    {
+        // delete user role
+        foreach (array_diff($this->roles, ($roles ?: [])) as $item) {
+            Yii::$app->authManager->revoke(Yii::$app->authManager->getRole($item), $this->id);
+        }
+
+        // add user role
+        foreach (array_diff(($roles ?: []), $this->roles) as $item) {
+            Yii::$app->authManager->assign(Yii::$app->authManager->getRole($item), $this->id);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param array $arr
+     * @return array
+     */
+    public function structureRoles(array $arr): array
+    {
+        $tmp = [];
+
+        foreach ($arr as $item) {
+            $tmp[$item] = $item;
+        }
+
+        return $tmp;
+    }
+
+    /**
+     * @return bool
+     */
+    public function beforeDelete(): bool
+    {
+        if (!parent::beforeDelete()) {
+            return false;
+        }
+
+        return Yii::$app->authManager->revokeAll($this->id);
     }
 }
